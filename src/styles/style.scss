@@ -1,0 +1,43 @@
+body {
+  background-color: #FAFAFA;
+}
+
+.login-form {
+  background-color: #fff;
+  width: 510px;
+  height: 520px;
+  border: 1px solid rgba(39, 39, 39, 0.1);
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 45px 88px 60px;
+  position: relative;
+  top: 140px;
+  left: calc(50% - 510px/2);
+
+  &__item {
+    margin-bottom: 20px;
+  }
+
+  &__logo {
+    width: 88px;
+    height: 88px;
+    position: relative;
+    left: calc(50% - 88px/2);
+    margin-bottom: 6%;
+  }
+
+  &__title {
+    width: 333px;
+    position: relative;
+    left: calc(50% - 333px/2 + 0.5px);
+    line-height: 28px;
+    text-align: center;
+  }
+
+  &__submit-button {
+    width: 176px;
+    height: 52px;
+    position: relative;
+    left: calc(50% - 176px/2);
+  }
+}
