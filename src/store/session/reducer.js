@@ -13,6 +13,12 @@ const sessionReducer = (state = initialState, action) => {
         token: action.payload.token,
         username: action.payload.username,
       };
+    case t.LOG_OUT:
+      return {
+        ...state,
+        token: '',
+        username: '',
+      };
     default:
       return state;
   }

@@ -2,6 +2,24 @@ body {
   background-color: #FAFAFA;
 }
 
+.header {
+  background-color: #fff;
+  width: 100%;
+  height: 80px;
+  padding: 0;
+  border-bottom: 1px solid #e8e8e8
+}
+
+.content-body {
+  background-color: #FAFAFA;
+}
+
+.content {
+  width: 72%;
+  position: relative;
+  left: calc(50% - 72%/2);
+}
+
 .login-form {
   background-color: #fff;
   width: 510px;
@@ -39,5 +57,33 @@ body {
     height: 52px;
     position: relative;
     left: calc(50% - 176px/2);
+  }
+}
+
+.menu {
+  font-size: 18px;
+
+  &__item {
+    height: 100%;
+
+    &__title {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__logo {
+      height: 80px;
+      margin-right: 3%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      float: left;
+    }
+
+    &_right {
+      float: right;
+    }
   }
 }

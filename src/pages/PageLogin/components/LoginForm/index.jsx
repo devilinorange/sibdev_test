@@ -17,6 +17,7 @@ const LoginForm = (props) => {
   const {
     getFieldDecorator,
     validateFields,
+    setFields,
   } = form;
 
   const handleSubmit = (e) => {
@@ -26,6 +27,17 @@ const LoginForm = (props) => {
         const verify = loginFunction(values.login, values.password);
         if (verify) {
           actionLogin(verify);
+        } else {
+          setFields({
+            login: {
+              value: '',
+              errors: null,
+            },
+            password: {
+              value: '',
+              errors: [new Error('Неверный логин или пароль!!!')],
+            },
+          });
         }
       }
     });

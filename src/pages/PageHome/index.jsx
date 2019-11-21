@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PageHome = () => (
-  <h1>Hello</h1>
+  <h1>helo</h1>
 );
 
 export default PageHome;

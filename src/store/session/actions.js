@@ -14,4 +14,10 @@ export const actionLogin = (token) => {
   };
 };
 
-export const actionLogout = () => null;
+export const actionLogout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('username');
+  return {
+    type: t.LOG_OUT,
+  };
+};
