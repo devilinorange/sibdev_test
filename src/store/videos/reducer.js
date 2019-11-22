@@ -4,6 +4,7 @@ const initialState = {
   isFetching: false,
   error: '',
   videos: [],
+  config: null,
 };
 
 const videosReducer = (state = initialState, action) => {
@@ -12,13 +13,15 @@ const videosReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        config: null,
         error: '',
       };
     case t.FETCH_VIDEOS_RESPONSE:
       return {
         ...state,
         isFetching: false,
-        videos: action.payload,
+        config: action.payload.config,
+        videos: action.payload.data,
       };
     case t.FETCH_VIDEOS_FAILED:
       return {

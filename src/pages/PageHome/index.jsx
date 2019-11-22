@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Typography,
@@ -10,6 +10,7 @@ import {
 } from 'antd';
 
 import VideoItem from './components/VideoItem/index';
+import SavePopover from './components/SavePopover/index';
 
 const PageHome = (props) => {
   const [terms, setTerms] = useState('');
@@ -20,10 +21,19 @@ const PageHome = (props) => {
     isFetching,
     error,
     videos,
+    config,
   } = props;
 
+  // ПОЛУЧАЕМ КЛЮЧЕВЫЕ СЛОВА ДЛЯ ТОГО ЧТОБЫ ОТОБРАЖАТЬ ИХ В "ВИДЕО ПО ЗАПРОСУ" ДЛЯ ТОГО ЧТОБЫ МЫ МОГЛИ ИХ ОТОБРАЖАТЬ И ПРИ ВЫПОЛНЕНИИ СОХРАНЕННЫХ ЗАПРОСОВ
+  useEffect(() => {
+    if (config) {
+      setTerms(config.params.q);
+    }
+  }, [config]);
+
+  // ЗАПРОС К YOUTUBE
   const handleSearch = (value) => {
-    fetchVideos(value);
+    fetchVideos(value, 'relevance', 12);
     setTerms(value);
   };
 
@@ -46,6 +56,13 @@ const PageHome = (props) => {
           size="large"
           onSearch={handleSearch}
           loading={isFetching}
+          suffix={(
+            <>
+              {!!videos.length && (
+                <SavePopover terms={terms} />
+              )}
+            </>
+          )}
         />
       </div>
       {!!videos.length && (
@@ -56,9 +73,13 @@ const PageHome = (props) => {
               <b>
                 &nbsp;
                 &ldquo;
-                {terms}
+                {config ? config.params.q : ''}
                 &ldquo;
               </b>
+              &nbsp;
+              Количество:
+              &nbsp;
+              {videos.length}
             </span>
             <div className="filter_right">
               <Icon
@@ -75,18 +96,39 @@ const PageHome = (props) => {
               />
             </div>
           </div>
-          <Row type="flex" gutter={[16, 16]} style={{ margin: '0' }}>
-            {videos.map((el) => (
-              <Col key={el.id} span={6}>
-                <VideoItem
-                  thumbnail={el.snippet.thumbnails.medium.url}
-                  title={el.snippet.title}
-                  channel={el.snippet.channelTitle}
-                  viewCount={el.statistics.viewCount}
-                />
-              </Col>
-            ))}
-          </Row>
+          {viewType === 'grid' ? (
+            <Row type="flex" gutter={[16, 16]} style={{ margin: '0' }}>
+              {videos.map((el) => (
+                <Col key={el.id} span={6}>
+                  <VideoItem
+                    list={viewType === 'list'}
+                    id={el.id}
+                    thumbnail={el.snippet.thumbnails.medium.url}
+                    title={el.snippet.title}
+                    channel={el.snippet.channelTitle}
+                    viewCount={el.statistics.viewCount}
+                  />
+                </Col>
+              ))}
+            </Row>
+          ) : (
+            <>
+              {videos.map((el) => (
+                <Row key={el.id} style={{ width: '66%', margin: 0 }} gutter={[0, 16]}>
+                  <Col span={24}>
+                    <VideoItem
+                      list={viewType === 'list'}
+                      id={el.id}
+                      thumbnail={el.snippet.thumbnails.medium.url}
+                      title={el.snippet.title}
+                      channel={el.snippet.channelTitle}
+                      viewCount={el.statistics.viewCount}
+                    />
+                  </Col>
+                </Row>
+              ))}
+            </>
+          )}
         </>
       )}
     </>
@@ -98,6 +140,11 @@ PageHome.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   error: PropTypes.string.isRequired,
   videos: PropTypes.arrayOf(PropTypes.object).isRequired,
+  config: PropTypes.objectOf(PropTypes.any),
+};
+
+PageHome.defaultProps = {
+  config: {},
 };
 
 export default PageHome;

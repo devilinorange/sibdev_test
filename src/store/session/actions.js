@@ -5,7 +5,6 @@ const JwtDecode = require('jwt-decode');
 export const actionLogin = (token) => {
   const { username } = JwtDecode(token);
   localStorage.setItem('token', token);
-  localStorage.setItem('username', username);
   return {
     type: t.LOG_IN,
     payload: {
@@ -16,7 +15,6 @@ export const actionLogin = (token) => {
 
 export const actionLogout = () => {
   localStorage.removeItem('token');
-  localStorage.removeItem('username');
   return {
     type: t.LOG_OUT,
   };

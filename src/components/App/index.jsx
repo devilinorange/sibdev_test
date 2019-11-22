@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import ContentRoute from '../../routers/ContentRoute/index';
 import MenuBarContainer from '../MenuBar/container/index';
 
-const App = () => {
+const App = (props) => {
+  const { actionLogin, username, actionLoadRequest } = props;
   const { pathname } = useLocation();
+
+
+  //  СМОТРИМ ЕСТЬ ЛИ ТОКЕН В localStorage
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      actionLogin(token);
+    }
+  }, [actionLogin]);
+
+
+  //  ПОДГРУЖАЕМ ЗАПРОСЫ ПОЛЬЗОВАТЕЛЯ ИЗ localStorage
+  useEffect(() => {
+    if (username) {
+      actionLoadRequest(username);
+    }
+  }, [username, actionLoadRequest]);
 
   return (
     <>
@@ -28,6 +48,12 @@ const App = () => {
       )}
     </>
   );
+};
+
+App.propTypes = {
+  actionLogin: PropTypes.func.isRequired,
+  actionLoadRequest: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 export default App;

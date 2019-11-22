@@ -1,0 +1,4 @@
+export const SAVE_REQUEST = 'SAVE_REQUEST';
+export const LOAD_REQUEST = 'LOAD_REQUEST';
+export const CHANGE_REQUEST = 'CHANGE_REQUEST';
+export const REMOVE_REQUEST = 'REMOVE_REQUEST';

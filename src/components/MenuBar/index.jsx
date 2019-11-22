@@ -12,6 +12,7 @@ const MenuBar = (props) => {
   const { actionLogout } = props;
   const { pathname } = useLocation();
 
+  //  ВЕШАЕМ ЭФФЕКТ ДЛЯ ТОГО ЧТОБЫ "ГОРЕЛА" НУЖНАЯ КНОПКА НАВИГАЦИИ (НЕ НАШЕЛ В ANTD ТАКОЙ ФУНКЦИИ КАК ПОДДЕРЖКА NAVLINK)
   useEffect(() => {
     switch (pathname) {
       case '/':

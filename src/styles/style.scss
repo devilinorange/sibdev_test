@@ -138,29 +138,64 @@ body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  color: #000;
 
-  &__thumbnail {
+  &__info {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    &__description {
+      display: flex;
+      flex-direction: column;
+      color: rgba(23, 23, 25, 0.3);
+
+      &__channel {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &__view {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
   }
 
-  &__title {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  &_list {
+    flex-direction: row;
+    align-items: stretch;
+
+    .videoItem {
+      &__thumbnail {
+        margin-right: 1em;
+      }
+
+      &__info {
+        justify-content: space-around;
+      }
+
+    }
+  }
+}
+
+.button {
+  border: 0;
+  padding: 0;
+
+  &_change {
+    color: #1390E5;
   }
 
-  &__channel {
-    color: rgba(23, 23, 25, 0.3);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &__view {
-    color: rgba(23, 23, 25, 0.3);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  &_remove {
+    color: red;
   }
 }
 

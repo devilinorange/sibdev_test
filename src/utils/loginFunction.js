@@ -4,6 +4,7 @@ import users from '../users';
 
 const nJwt = require('njwt');
 
+// ПРОВЕРЯЕМ ЕСТЬ ЛИ ПОЛЬЗОВАТЕЛЬ В ЧИСЛЕ "ЗАРЕГЕСТРИРОВАННЫХ" И ГЕНЕРИРУЕМ ТОКЕН
 export default (login, password) => {
   for (let i = 0; i < users.length; i++) {
     if (users[i].login === login && users[i].password === password) {
