@@ -13,7 +13,7 @@ const App = () => {
       {pathname === '/login' ? (
         <ContentRoute />
       ) : (
-        <Layout>
+        <Layout className="layout">
           <Layout.Header className="header">
             <div className="content">
               <MenuBarContainer />

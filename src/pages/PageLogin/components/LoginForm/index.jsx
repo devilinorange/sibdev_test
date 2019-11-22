@@ -43,6 +43,14 @@ const LoginForm = (props) => {
     });
   };
 
+  const checkInput = (rule, value, callback) => {
+    if (!value) {
+      callback('Обязательное поле');
+    } else {
+      callback();
+    }
+  };
+
   if (token) {
     return <Redirect to="/" />;
   }
@@ -51,16 +59,20 @@ const LoginForm = (props) => {
     <Form layout="vertical" onSubmit={handleSubmit} labelAlign="right" className="login-form">
       <img src={logo} alt="logo" className="login-form__logo" />
       <Typography.Title level={3} className="login-form__title">Вход</Typography.Title>
-      <Form.Item label="Логин" className="login-form__item">
+      <Form.Item label={<span style={{ color: 'rgba(23, 23, 25, 0.3)' }}>Логин</span>} className="login-form__item">
         {getFieldDecorator('login', {
-          rules: [{ required: true, message: 'Введите логин' }],
+          rules: [{
+            validator: checkInput,
+          }],
         })(
           <Input placeholder="Ваш логин" />,
         )}
       </Form.Item>
-      <Form.Item label="Пароль" className="login-form__item">
+      <Form.Item label={<span style={{ color: 'rgba(23, 23, 25, 0.3)' }}>Пароль</span>} className="login-form__item">
         {getFieldDecorator('password', {
-          rules: [{ required: true, message: 'Введите пароль' }],
+          rules: [{
+            validator: checkInput,
+          }],
         })(
           <Input.Password placeholder="Ваш пароль" />,
         )}

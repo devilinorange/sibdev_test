@@ -1,5 +1,14 @@
 body {
   background-color: #FAFAFA;
+  color: #000;
+}
+
+#root {
+  height: 100%;
+}
+
+.layout {
+  height: 100%;
 }
 
 .header {
@@ -12,9 +21,11 @@ body {
 
 .content-body {
   background-color: #FAFAFA;
+  height: 100%;
 }
 
 .content {
+  height: 100%;
   width: 72%;
   position: relative;
   left: calc(50% - 72%/2);
@@ -56,6 +67,7 @@ body {
     width: 176px;
     height: 52px;
     position: relative;
+    bottom: 0;
     left: calc(50% - 176px/2);
   }
 }
@@ -86,4 +98,72 @@ body {
       float: right;
     }
   }
+}
+
+.search_main {
+  position: relative;
+  width: 66%;
+  top: 22%;
+  left: calc(50% - 66%/2);
+  text-align: center;
+}
+
+.search_second {
+  position: relative;
+  width: 100;
+}
+
+.filter {
+  margin-top: 2em;
+  margin-bottom: 1.5em;
+  font-size: 16px;
+
+  &_right {
+    float: right;
+    font-size: 24px;
+  }
+
+  &__icon {
+    padding: 8px;
+    opacity: 0.3;
+
+    &_active {
+      opacity: 1;
+    }
+  }
+}
+
+.videoItem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  &__thumbnail {
+  }
+
+  &__title {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__channel {
+    color: rgba(23, 23, 25, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__view {
+    color: rgba(23, 23, 25, 0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.ant-form-vertical .ant-form-item-label {
+  padding: 0;
 }
